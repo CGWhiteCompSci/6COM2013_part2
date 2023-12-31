@@ -1,3 +1,6 @@
+//cw22aba@herts.ac.uk
+//20040033
+
 package src;
 
 public class Competitor {
