@@ -3,6 +3,9 @@
 
 package src;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Competitor {
     private int iDNumber;
     private String name;
@@ -11,16 +14,19 @@ public class Competitor {
     private String country;
     private String email;
 
+    private int[] scores;
 
 
 
-    public Competitor (int newiDNumber, String newName, String newDoB, String newLevel, String newCountry, String newEmail){
+
+    public Competitor (int newiDNumber, String newName, String newDoB, String newLevel, String newCountry, String newEmail, int[] newScores){
         this.iDNumber = newiDNumber;
         this.name = newName;
         this.DoB = newDoB;
         this.level = newLevel;
         this.country = newCountry;
         this.email = newEmail;
+        this.scores = newScores;
     }
 
     public int getiDNumber() {
@@ -71,21 +77,36 @@ public class Competitor {
         this.email = email;
     }
 
-    public double getOverallScore() { return 5; }
+    public String scoresToString(int[] scores)
+        {
+            return Arrays.toString(scores);
+        }
+
+
+
+    public double getOverallScore(int[] driverScores) {
+        int score = 0;
+
+        for (int i = 0; i < driverScores.length; i++) {
+            score += driverScores[i];
+        }
+
+        return score;
+    }
 
     public String getFullDetails() {
-        String fullDetails = "competitor number: " + this.iDNumber + " is " + this.level + ", " + this.name+ ". Born " + this.DoB + " from" + this.country + " their email is: " + this.email + ". their score is " + getOverallScore();
+        String fullDetails = "competitor number: " + this.iDNumber + " is " + this.level + ", " + this.name+ ". Born " + this.DoB + " from " + this.country + "\ntheir email is: " + this.email + ". their scores are " + scoresToString(this.scores) + "\nThis gives him an overall score of" + getOverallScore(this.scores);
         return fullDetails;
     }
 
     public String getShortDetails() {
-        String shortDetails = "CN " + this.iDNumber + "(" +this.name+ ") has overall score" + getOverallScore();
+        String shortDetails = "CN " + this.iDNumber + "(" +this.name+ ") has overall score" + getOverallScore(this.scores);
         return shortDetails;
     }
 
     public static void main(String[] args) {
-        Competitor comp1 = new Competitor(1,"Mario", "15/10/2001","Pro","itialy","mario@superbros.com");
-        System.out.println(comp1.getFullDetails());
+        //Competitor comp1 = new Competitor(1,"Mario", "15/10/2001","Pro","itialy","mario@superbros.com");
+        //System.out.println(comp1.getFullDetails());
 
     }
 }
