@@ -3,7 +3,7 @@
 
 package src;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Competitor {
@@ -14,12 +14,12 @@ public class Competitor {
     private String country;
     private String email;
 
-    private int[] scores;
+    private ArrayList<Integer> scores = new ArrayList<Integer>();
 
 
 
 
-    public Competitor (int newiDNumber, String newName, String newDoB, String newLevel, String newCountry, String newEmail, int[] newScores){
+    public Competitor (int newiDNumber, String newName, String newDoB, String newLevel, String newCountry, String newEmail, ArrayList<Integer> newScores){
         this.iDNumber = newiDNumber;
         this.name = newName;
         this.DoB = newDoB;
@@ -77,18 +77,22 @@ public class Competitor {
         this.email = email;
     }
 
-    public String scoresToString(int[] scores)
+    public String scoresToString(ArrayList<Integer> scores)
         {
-            return Arrays.toString(scores);
+            String line = String.valueOf(scores.get(0));
+            for (int i = 1; i < scores.size(); i++) {
+                line = line + ", "+ scores.get(i);
+                }
+            return line;
         }
 
 
 
-    public double getOverallScore(int[] driverScores) {
+    public double getOverallScore(ArrayList<Integer> driverScores) {
         int score = 0;
 
-        for (int i = 0; i < driverScores.length; i++) {
-            score += driverScores[i];
+        for (int i = 0; i < driverScores.size(); i++) {
+            score += driverScores.get(i);
         }
 
         return score;
