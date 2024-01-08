@@ -87,6 +87,7 @@ public class Driver {
         Manager testman = new Manager();
         testman.genReport(testlist1);
         System.out.println(testlist1.findDriver(101));
+        CompetitorListGUI testGUI = new CompetitorListGUI(testlist1);
 
     }
 
