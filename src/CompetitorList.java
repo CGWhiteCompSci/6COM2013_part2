@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CompetitorList {
 
-    private ArrayList<Driver> competitors = new ArrayList<Driver>();
+    private ArrayList<Competitor> competitors = new ArrayList<Competitor>();
 
     public CompetitorList() {
         loadData();
@@ -18,7 +18,7 @@ public class CompetitorList {
     public String tableFormat(){
         String bigString = "";
         for (int i = 0; i < this.competitors.size(); i++){
-            bigString = bigString + this.competitors.get(i).getDriverDetails().toString() + " " + this.competitors.get(i).toString() + "\n";
+            bigString = bigString + this.competitors.get(i).toString() + " " + this.competitors.get(i).getDriver().pointsToString() + "\n";
 
 
         }
@@ -33,7 +33,7 @@ public class CompetitorList {
             currentScore = competitors.get(i).getOverallScore();
             if (currentScore > highestScore) {
                 highestScore = currentScore;
-                bigString = competitors.get(i).getDriverDetails().getName().getFirstName() + " is the highest scorer with " + highestScore;
+                bigString = competitors.get(i).getName().getFirstName() + " is the highest scorer with " + highestScore;
             }
         }
         return bigString;
@@ -41,16 +41,34 @@ public class CompetitorList {
     public String numofFirsts() {
         String bigString = "";
         int firsts = 0;
+        for (int i = 0; i < competitors.size(); i++) {
+            for (int i2 = 0; i2 < competitors.get(i).getDriver().getPoints().length; i2++){
+                if (competitors.get(i).getDriver().getPoints()[i2] == 5){
+                    firsts++;
+                }
+            }
+        }
 
 
         bigString = "number of firsts " +String.valueOf(firsts);
         return bigString;
     }
+
+    public String findDriver(int iDNum){
+        for (int i = 0; i < competitors.size(); i++) {
+            if (competitors.get(i).getiDNumber() == iDNum){
+                return competitors.get(i).getShortDetails();
+            }
+        }
+        return "not found";
+    }
+
+
     public void loadData() {
         String filePath = "src/RunCompetitor.csv";
         int tempID = 0;
-        String tempName, tempDoB, tempCatagory, tempLevel, tempCountry, tempEmail;
-        tempName = tempDoB = tempCatagory = tempLevel = tempCountry = tempEmail = "";
+        String tempName, tempDoB, tempLevel, tempCountry, tempEmail;
+        tempName = tempDoB = tempLevel = tempCountry = tempEmail = "";
 
 
 
@@ -98,18 +116,8 @@ public class CompetitorList {
 
                             }
                         }
+
                         if (i == 3) {
-                            if (lineofdata[i] != null) {
-                                tempCatagory = lineofdata[i];
-                            }
-                            else{
-                                errorFlag = Boolean.TRUE;
-                                System.out.println("Category is Invalid");
-
-                            }
-                        }
-
-                        if (i == 4) {
                             if (lineofdata[i] != null) {
                                 tempLevel = lineofdata[i];
                             }
@@ -119,7 +127,7 @@ public class CompetitorList {
                             }
                         }
 
-                        if (i == 5) {
+                        if (i == 4) {
                             if (lineofdata[i] != null) {
                                 tempCountry = lineofdata[i];
                             }
@@ -129,7 +137,7 @@ public class CompetitorList {
                             }
                         }
 
-                        if (i == 6) {
+                        if (i == 5) {
                             if (lineofdata[i] != null) {
                                 tempEmail = lineofdata[i];
                             }
@@ -157,9 +165,10 @@ public class CompetitorList {
 
                         }
 
-                        Competitor tempCompetitor = new Competitor(tempID,new Name(tempName),tempDoB,tempCatagory,tempLevel,tempCountry,tempEmail);
-                        Driver tempDriver = new Driver(scoresConvert,tempCompetitor);
-                        competitors.add(tempDriver);
+
+                        Driver tempDriver = new Driver(scoresConvert);
+                        Competitor tempCompetitor = new Competitor(tempID,new Name(tempName),tempDoB,tempLevel,tempCountry,tempEmail,tempDriver);
+                        competitors.add(tempCompetitor);
 
 
                     }

@@ -6,13 +6,12 @@ import java.util.List;
 
 public class Driver {
     private int[] points = new int[5];
-    private Competitor driverDetails;
 
 
 
-    public Driver(int[] points, Competitor details) {
+
+    public Driver(int[] points) {
         this.points = points;
-        this.driverDetails = details;
 
     }
 
@@ -32,13 +31,6 @@ public class Driver {
         this.points = points;
     }
 
-    public Competitor getDriverDetails() {
-        return driverDetails;
-    }
-
-    public void setDriverDetails(Competitor driverDetails) {
-        this.driverDetails = driverDetails;
-    }
 
     public String pointsToString(){
         String pointsString = "";
@@ -82,14 +74,6 @@ public class Driver {
         return overallscore;
     }
 
-    public String getFullDetails() {
-        String fullDetails = "competitor number: " + this.driverDetails.getiDNumber() + " is " + this.driverDetails.getName().getFullName()
-                + " from " + this.driverDetails.getCountry() + "\n"+ this.driverDetails.getName().getFirstName() + " was born "+this.driverDetails.getDoB()+ "\n"
-                + "competing in the " + this.driverDetails.getCatagory() + " with current points " + this.pointsToString()+"\n"
-                + "this gives them an overall score of " + getOverallScore();
-
-        return fullDetails;
-    }
 
 
     public static void main(String[] args) {
@@ -102,7 +86,9 @@ public class Driver {
         CompetitorList testlist1 = new CompetitorList();
         Manager testman = new Manager();
         testman.genReport(testlist1);
+        System.out.println(testlist1.findDriver(101));
 
     }
+
 
 }

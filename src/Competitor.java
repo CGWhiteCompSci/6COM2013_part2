@@ -13,20 +13,21 @@ public class Competitor {
     private Name name;
     private String DoB;
 
-    private String catagory;
     private String level;
     private String country;
     private String email;
 
+    private Driver driver;
 
-    public Competitor(int iDNumber, Name name, String doB, String category, String level, String country, String email) {
+
+    public Competitor(int iDNumber, Name name, String doB, String level, String country, String email, Driver driver) {
         this.iDNumber = iDNumber;
         this.name = name;
         this.DoB = doB;
-        this.catagory = category;
         this.level = level;
         this.country = country;
         this.email = email;
+        this.driver = driver;
 
     }
 
@@ -36,7 +37,6 @@ public class Competitor {
                 "iDNumber=" + iDNumber +
                 ", name=" + name.getFullName() +
                 ", DoB='" + DoB + '\'' +
-                ", catagory='" + catagory + '\'' +
                 ", level='" + level + '\'' +
                 ", country='" + country + '\'' +
                 ", email='" + email + '\'' +
@@ -67,14 +67,6 @@ public class Competitor {
         DoB = doB;
     }
 
-    public String getCatagory() {
-        return catagory;
-    }
-
-    public void setCatagory(String catagory) {
-        this.catagory = catagory;
-    }
-
     public String getLevel() {
         return level;
     }
@@ -99,19 +91,54 @@ public class Competitor {
         this.email = email;
     }
 
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
     public double getOverallScore() {
-        return 5;
+        double overallscore = 0.0;
+
+        for (int i = 0; i < this.driver.getPoints().length; i++){
+            switch(i){
+                case 0:
+                    overallscore = overallscore + this.driver.getPoints()[i] * 1.1;
+                    break;
+                case 1:
+                    overallscore = overallscore + this.driver.getPoints()[i] * 1.2;
+                    break;
+                case 2:
+                    overallscore = overallscore + this.driver.getPoints()[i] * 1.3;
+                    break;
+                case 3:
+                    overallscore = overallscore + this.driver.getPoints()[i] * 1.4;
+                    break;
+                case 4:
+                    overallscore = overallscore + this.driver.getPoints()[i] * 1.5;
+                    break;
+            }
+        }
+        overallscore = overallscore/this.driver.getPoints().length;
+
+
+
+        return overallscore;
     }
 
     public String getFullDetails() {
-        String fullDetails = "competitor number: " + this.iDNumber + " is " + this.name.getFullName()
-                + " from " + this.country + "\n"+ this.name.getFirstName() + " was born "+this.DoB + "\n"
-                + "competing in the " + this.catagory + " with an overall score of " + this.getOverallScore();
+        String fullDetails = "competitor number: " + this.getiDNumber() + " is " + this.getName().getFullName()
+                + " from " + this.getCountry() + "\n"+ this.getName().getFirstName() + " was born "+this.getDoB()+ "\n"
+                + " with current points " + this.driver.pointsToString()+"\n"
+                + "this gives them an overall score of " + getOverallScore();
+
         return fullDetails;
     }
 
     public String getShortDetails() {
-        String shortDetails = "CN " + this.iDNumber + "(" +this.name.genIntials() +" has overall score " + this.getOverallScore();
+        String shortDetails = "CN " + this.iDNumber + " (" +this.name.genIntials() +") has overall score " + this.getOverallScore();
         return shortDetails;
     }
 
