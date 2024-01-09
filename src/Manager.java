@@ -31,6 +31,11 @@ public class Manager {
 
     }
 
+    public static void main(String[] args) {
+        CompetitorList test1 = new CompetitorList();
+        CompetitorListGUI view = new CompetitorListGUI(test1);
+        CompetitorListController controller = new CompetitorListController(test1,view);
+    }
 
 
 

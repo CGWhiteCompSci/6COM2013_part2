@@ -43,6 +43,21 @@ public class Competitor {
                 '}';
     }
 
+    public String tableFormat() {
+        return iDNumber + " " + name.getFullName() + " " + DoB + " " + level + " " + country + " " + email + " " + getOverallScore();
+    }
+
+    public String dataRow() {
+        return iDNumber
+        + name.getFullName()
+        + DoB
+        + level
+        + country
+        + email
+        + this.getOverallScore();
+
+    }
+
     public int getiDNumber() {
         return iDNumber;
     }
@@ -142,11 +157,6 @@ public class Competitor {
         return shortDetails;
     }
 
-    public static void main(String[] args) {
-        //Competitor comp1 = new Competitor(100,new Name("Super Mario"), "15/10/2001","Pro","100cc","itialy","mario@superbros.com",new int[]{2, 4, 2, 4, 1});
-        //System.out.println(comp1.name.getFirstName());
-
-    }
 }
 
 

@@ -76,20 +76,7 @@ public class Driver {
 
 
 
-    public static void main(String[] args) {
-        //Driver test_driver1 = new Driver(new int[]{5, 3, 2, 1, 1},new Competitor(100,new Name("Super Mario"), "15/10/2001","Pro","100cc","itialy","mario@superbros.com"));
-        //Driver test_driver2 = new Driver(new int[]{2, 1, 3, 4, 4});
-        //Driver test_driver3 = new Driver(new int[]{3, 3, 4, 2, 5});
-        //test_driver1.getOverallScore();
-        //test_driver1.getFullDetails();
 
-        CompetitorList testlist1 = new CompetitorList();
-        Manager testman = new Manager();
-        testman.genReport(testlist1);
-        System.out.println(testlist1.findDriver(101));
-        CompetitorListGUI testGUI = new CompetitorListGUI(testlist1);
-
-    }
 
 
 }
